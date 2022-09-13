@@ -13,6 +13,10 @@
     datastore_choice: datastore1
     vm_name: ISEcube
 
+  vars_files:
+    - requirements.yml
+    - credentials.yml
+
   tasks: 
 
   - name: Deploy ISE OVF 
