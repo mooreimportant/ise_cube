@@ -14,7 +14,6 @@
     vm_name: ISEcube
 
   vars_files:
-    - requirements.yml
     - credentials.yml
 
   tasks: 
