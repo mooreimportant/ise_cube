@@ -1,0 +1,33 @@
+---
+- name: Launch ISE OVA
+  hosts: firsthost
+  become: yes
+  gather_facts: no 
+
+  vars: 
+  ise_ovf_path: /iso_files/ISE-3.1.0.518b-virtual-SNS3615-SNS3655-300.ova
+  datacenter_location: 
+  chosen_cluster: 
+  deployment_type: Eval
+  network_choice: VM Network
+  datastore_choice: datastore1
+  vm_name: ISEcube
+
+  tasks: 
+
+  - name: Deploy ISE OVF 
+    community.vmware.vmware_deploy_ovf:
+      esxi_hostname: '{{ vcenter_hostname }}'
+      username: '{{ vcenter_username }}'
+      password: '{{ vcenter_password }}'
+      port: '{{ vcenter_port }}'
+      ovf: '{{ ise_ovf_path }}'
+     # datacenter: '{{ datacenter_location }}'
+     # cluster: '{{ chosen_cluster }}'
+      deployment_option: "{{ deployment_type }}"
+      disk_provisioning: '{{ disk_choice }}'
+      networks: '{{ network_choice }}'
+      datastore: '{{ datastore_choice }}'
+      name: "{{ vm_name }}"
+      validate_certs: no
+      power_on: no
