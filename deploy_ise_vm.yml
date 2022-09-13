@@ -11,6 +11,7 @@
     deployment_type: Eval
     network_choice: VM Network
     datastore_choice: datastore1
+    disk_choice: thin
     vm_name: ISEcube
 
   vars_files:
