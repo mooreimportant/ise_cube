@@ -19,19 +19,19 @@
 
   tasks: 
 
-  - name: Deploy ISE OVF 
-    community.vmware.vmware_deploy_ovf:
-      esxi_hostname: '{{ vcenter_hostname }}'
-      username: '{{ vcenter_username }}'
-      password: '{{ vcenter_password }}'
-      port: '{{ vcenter_port }}'
-      ovf: '{{ ise_ovf_path }}'
-     # datacenter: '{{ datacenter_location }}'
-     # cluster: '{{ chosen_cluster }}'
-      deployment_option: "{{ deployment_type }}"
-      disk_provisioning: '{{ disk_choice }}'
-      networks: '{{ network_choice }}'
-      datastore: '{{ datastore_choice }}'
-      name: "{{ vm_name }}"
-      validate_certs: no
-      power_on: no
+    - name: Deploy ISE OVF 
+      community.vmware.vmware_deploy_ovf:
+        esxi_hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        port: '{{ vcenter_port }}'
+        ovf: '{{ ise_ovf_path }}'
+       # datacenter: '{{ datacenter_location }}'
+       # cluster: '{{ chosen_cluster }}'
+        deployment_option: "{{ deployment_type }}"
+        disk_provisioning: '{{ disk_choice }}'
+        networks: '{{ network_choice }}'
+        datastore: '{{ datastore_choice }}'
+        name: "{{ vm_name }}"
+        validate_certs: no
+        power_on: no
