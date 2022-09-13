@@ -5,13 +5,13 @@
   gather_facts: no 
 
   vars: 
-  ise_ovf_path: /iso_files/ISE-3.1.0.518b-virtual-SNS3615-SNS3655-300.ova
-  datacenter_location: 
-  chosen_cluster: 
-  deployment_type: Eval
-  network_choice: VM Network
-  datastore_choice: datastore1
-  vm_name: ISEcube
+    ise_ovf_path: /iso_files/ISE-3.1.0.518b-virtual-SNS3615-SNS3655-300.ova
+    datacenter_location: 
+    chosen_cluster: 
+    deployment_type: Eval
+    network_choice: VM Network
+    datastore_choice: datastore1
+    vm_name: ISEcube
 
   tasks: 
 
