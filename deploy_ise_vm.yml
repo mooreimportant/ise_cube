@@ -20,7 +20,7 @@
   tasks: 
 
   - name: Deploy ISE OVF 
-    community.vmware.vmware_deploy_ovf:
+    community.vmware_deploy_ovf:
       esxi_hostname: '{{ vcenter_hostname }}'
       username: '{{ vcenter_username }}'
       password: '{{ vcenter_password }}'
