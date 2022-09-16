@@ -7,41 +7,46 @@
     - credentials.yml
 
   gather_facts: no 
-  tasks: 
 
+  tasks: 
 
   # Must Enable APIs before gathering facts! 
   - name: Enable ISE APIs 
     import_tasks: ise_enable_apis.tasks.yml 
 
   # The Rest API for getting the Version might fail :(
-  - name: Set Facts for ISE ( version, patch, etc)
-    import_tasks: ise_set_facts.tasks.yml
+  #- name: Set Facts for ISE ( version, patch, etc)
+  #  import_tasks: ise_set_facts.tasks.yml
+  #  register: ise_facts 
 
-  - name: Create dCloud Repository
-    when: inventory_hostname == "ise.securitydemo.net" or inventory_hostname is match("198.18")
-    vars: 
-      name: FTP_dCloud
-      serverName: 198.18.133.1
-      protocol: FTP
-      path: /
-      userName: ise
-      password: C1sco12345
-      enablePki: false
-    ansible.builtin.include_tasks: repository.tasks.yaml
+  #- name: Print ISE Facts 
+  #  debug:
+  #    msg: "{{ ise_facts.stdout }}"
+
+  #- name: Create dCloud Repository
+  #  when: inventory_hostname == "ise.securitydemo.net" or inventory_hostname is match("198.18")
+  #  vars: 
+  #    name: FTP_dCloud
+  #    serverName: 198.18.133.1
+  #    protocol: FTP
+  #    path: /
+  #    userName: ise
+  #    password: C1sco12345
+  #    enablePki: false
+  #  ansible.builtin.include_tasks: repository.tasks.yaml
 
 
-  - name: Create DevNet Repository
-    when: inventory_hostname is match("10.10.")
-    vars: 
-      name: FTP_DevNet
-      serverName: 10.10.20.90
-      protocol: FTP
-      path: /
-      userName: ise
-      password: C1sco12345
-      enablePki: false
-    ansible.builtin.include_tasks: repository.tasks.yaml
+  #- name: Create DevNet Repository
+  #  when: inventory_hostname is match("10.10.")
+  #  vars: 
+  #    name: FTP_DevNet
+  #    serverName: 10.10.20.90
+  #    protocol: FTP
+  #    path: /
+  #    userName: ise
+  #    password: C1sco12345
+  #    enablePki: false
+  #  ansible.builtin.include_tasks: repository.tasks.yaml
 
 
   # - name: Add Trusted CA Certificates
@@ -51,18 +56,18 @@
   #   ansible.builtin.import_tasks: Add_ISE_Certificate.yaml
 
 
-  - name: Create and Join dCloud.cisco.com Active Directory Domain
-    when: inventory_hostname is match("ise.sec") or inventory_hostname is match("198.18")
-    vars:
-      ad_domain_name: dcloud.cisco.com
-    ansible.builtin.include_tasks: active_directory.tasks.yaml
+  #- name: Create and Join dCloud.cisco.com Active Directory Domain
+  #  when: inventory_hostname is match("ise.sec") or inventory_hostname is match("198.18")
+  #  vars:
+  #    ad_domain_name: dcloud.cisco.com
+  #  ansible.builtin.include_tasks: active_directory.tasks.yaml
 
-  - name: Create and Join lab.devnetsandbox.local Active Directory Domain
-    when: inventory_hostname is match("10.10.")
-    vars:
-      ad_domain_name: ad.lab.devnetsandbox.local
-    ansible.builtin.include_tasks: active_directory.tasks.yaml
-    register: result
+  #- name: Create and Join lab.devnetsandbox.local Active Directory Domain
+  #  when: inventory_hostname is match("10.10.")
+  #  vars:
+  #    ad_domain_name: ad.lab.devnetsandbox.local
+  #  ansible.builtin.include_tasks: active_directory.tasks.yaml
+  #  register: result
 
 
   #
@@ -82,11 +87,11 @@
   # - name: Add vanillaise to Identity Source Sequence
   #   ansible.builtin.import_tasks: _not_implemented.yaml
 
-  - name: Create Network Device Groups
-    ansible.builtin.import_tasks: network_device_group.tasks.yaml
+  #- name: Create Network Device Groups
+  #  ansible.builtin.import_tasks: network_device_group.tasks.yaml
 
-  - name: Add Network Devices
-    ansible.builtin.import_tasks: network_device.tasks.yaml
+  #- name: Add Network Devices
+  #  ansible.builtin.import_tasks: network_device.tasks.yaml
 
   #
   # ⟁ internal_users is NOT idempotent: Cannot compare the user's password.
@@ -101,11 +106,11 @@
   #   Sponsor | String
   #   Authorization | String
   # 
-  - name: Create Internal Users
-    ansible.builtin.import_tasks: internal_users.tasks.yaml
+  #- name: Create Internal Users
+  #  ansible.builtin.import_tasks: internal_users.tasks.yaml
 
-  - name: Add Endpoint Groups
-    ansible.builtin.import_tasks: endpoint_groups.tasks.yaml
+  #- name: Add Endpoint Groups
+  #  ansible.builtin.import_tasks: endpoint_groups.tasks.yaml
 
   #
   # If you want to use Endpoint Custom Attributes, they must be added
@@ -123,14 +128,14 @@
   #   OS | String
   # 
 
-  - name: Add Surveillance Cameras
-    ansible.builtin.import_tasks: endpoint-cameras.tasks.yaml
+  #- name: Add Surveillance Cameras
+  #  ansible.builtin.import_tasks: endpoint-cameras.tasks.yaml
 
-  - name: Add IP Phones
-    ansible.builtin.import_tasks: endpoint-ip_phones.tasks.yaml
+  #- name: Add IP Phones
+  #  ansible.builtin.import_tasks: endpoint-ip_phones.tasks.yaml
 
-  - name: Add Printers
-    ansible.builtin.import_tasks: endpoint-printers.tasks.yaml
+  #- name: Add Printers
+  #  ansible.builtin.import_tasks: endpoint-printers.tasks.yaml
 
-  - name: Backup Configuration Now
-    ansible.builtin.import_tasks: backup_config_now.tasks.yaml
+  #- name: Backup Configuration Now
+  #  ansible.builtin.import_tasks: backup_config_now.tasks.yaml
