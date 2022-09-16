@@ -1,6 +1,6 @@
 ---
 
-- Name: Deploy ise from a collection of tasks
+- name: Deploy ise from a collection of tasks
   hosts: "{{ hosts_var }}"
   vars: 
   vars_files:
