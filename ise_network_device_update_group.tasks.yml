@@ -1,0 +1,33 @@
+---
+- name: Updates a network device
+  hosts: ise_deployment
+  vars_files:
+   - credentials.yml
+  gather_facts: no
+  
+  tasks:
+
+  - name: simulator
+    cisco.ise.network_device:
+      ise_hostname: "{{ise_hostname}}"
+      ise_username: "{{ise_username}}"
+      ise_password: "{{ise_password}}"
+      ise_verify: "{{ise_verify}}"
+      state: present
+      name: simulator
+      profileName: Cisco
+      authenticationSettings:
+          networkProtocol: RADIUS
+          radiusSharedSecret: "{{radius_secret}}"
+      tacacsSettings:
+          sharedSecret: "{{tacacs_secret}}"
+          connectModeOptions: "OFF"
+      coaPort: 0
+      NetworkDeviceIPList:
+      - ipaddress: 10.10.20.32
+          mask: 32
+      NetworkDeviceGroupList:
+      - Location#All Locations
+      - IPSEC#Is IPSEC Device#No
+      - Device Type#All Device Types
+    register: result
