@@ -206,7 +206,7 @@
       ipv4: 192.168.1.1
       profile_name: Cisco
       network_device_groups:
-      - Device Type#All Device Types#Router#UDM-Pro
+      - Device Type#All Device Types#Router#UDM-Pro#POC
       - Location#All Locations#AMER#HOME
     cisco.ise.network_device:
       ise_hostname: "{{ inventory_hostname }}"
