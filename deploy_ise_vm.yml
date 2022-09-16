@@ -36,3 +36,4 @@
         name: "{{ vm_name }}"
         validate_certs: no
         power_on: no
+      delegate_to: localhost
