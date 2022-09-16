@@ -15,9 +15,9 @@
     import_tasks: ise_enable_apis.tasks.yml 
 
   # The Rest API for getting the Version might fail :(
-  #- name: Set Facts for ISE ( version, patch, etc)
-  #  import_tasks: ise_set_facts.tasks.yml
-  #  register: ise_facts 
+  - name: Set Facts for ISE ( version, patch, etc)
+    import_tasks: ise_set_facts.tasks.yml
+    register: ise_facts 
 
   #- name: Print ISE Facts 
   #  debug:
