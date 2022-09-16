@@ -88,10 +88,10 @@
   #   ansible.builtin.import_tasks: _not_implemented.yaml
 
   - name: Create Network Device Groups
-    ansible.builtin.import_tasks: ise_network_device_group.tasks.yaml
+    ansible.builtin.import_tasks: ise_network_device_groups.tasks.yaml
 
   - name: Add Network Devices
-    ansible.builtin.import_tasks: ise_network_device.tasks.yaml
+    ansible.builtin.import_tasks: ise_network_devices.tasks.yaml
 
   #
   # ⟁ internal_users is NOT idempotent: Cannot compare the user's password.
