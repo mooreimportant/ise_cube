@@ -1,5 +1,16 @@
 ---
 
+#
+# Tasks to Enable APIs 
+#
+# To use in a playbook: 
+# import_tasks: ISE_Enable_APIs.tasks.yml
+# or 
+# include_tasks: ISE_Enable_APIs_tasks.yml
+
+# use ISE_set_facts.tasks.yml if version is not defined!
+
+
 - name: Enable ISE OpenAPIs (ISE 3.1+)
   delegate_to: localhost 
   ansible.builtin.uri:
@@ -17,4 +28,39 @@
 
 
 - name: ISE OpenAPIs Enabled Status 
-  when: 
+  when: (response.status == 200) or (response.content.find('already enabled') != 1)
+  ansible.builtin.debug:
+    msg: "✅ ISE OpenAPIs Enabled"
+
+- name: ISE OpenAPIs Disabled Status 
+  when: (response.status != 200) and (response.status != 500)
+  ansible.builtin.debug:
+    msg : "❌ ISE OpenAPIs Disabled"
+
+- name: Enable ISE ERS APIs 
+  delegate_to: localhost
+  ansible.builtin.uri:
+    url: "https://{{ inventory_hostname }}/admin/API/NetworkAccessConfig/ERS"
+    method: PUT 
+    url_username: "{{ ise_username }}"
+    url_password: "{{ ise_password }}"
+    force_basic_auth: yes
+    headers: 
+      Accept: application/xml
+      Content-Type: application/xml
+    body: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ersConfig>
+          <id>1</id><isCSRFCheck>false</isCSRFCheck><isPapEnabled>true</isPapEnabled><isPsnsEnabled>true</isPsnsEnabled></ersConfig>'
+    status_code: 200
+    validate_certs: "{{ ise_verify }}"
+    return_content: true 
+  register: response 
+
+- name: ISE ERS Enabled Status 
+  when: response.status == 200
+  ansible.builtin.debug:
+    msg: "✅ ISE ERS APIs Enabled"
+
+- name: ISE ERS Disabled Status 
+  when: response.status != 200
+  ansible.builtin.debug:
+    msg: "❌ ISE ERS APIs Disabled"
