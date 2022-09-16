@@ -1,7 +1,7 @@
 ---
 
 - name: Deploy ise from a collection of tasks
-  hosts: "{{ hosts_var }}"
+  hosts: isecube
   vars: 
   vars_files:
     - credentials.yml
