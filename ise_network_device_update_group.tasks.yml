@@ -1,13 +1,23 @@
 ---
-- name: Updates a network device
-  hosts: ise_deployment
+- name: Updates a switch Network Device in ISE
+  hosts: isecube
+    
+  vars:
+    device_name: unifi.local.lan
+    description: UDM Dream Machine Pro
+    ipv4: 192.168.1.1
+    profile_name: Cisco
+    network_device_groups:
+    - Device Type#All Device Types#NAC Switches#POC Sites
+    - Location#All Locations#AMER#HOME 
+    
   vars_files:
    - credentials.yml
   gather_facts: no
   
   tasks:
 
-  - name: simulator
+  - name: Update a switch
     cisco.ise.network_device:
       ise_hostname: "{{ise_hostname}}"
       ise_username: "{{ise_username}}"
